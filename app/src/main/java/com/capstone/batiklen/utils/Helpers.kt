@@ -23,8 +23,10 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
+import java.time.Instant
 import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 private const val fileNameFormat ="yyyyMMdd_HHmmss"
 private const val MaximalSize = 1000000
@@ -44,6 +46,19 @@ fun getImageUri(context: Context): Uri {
         )
     }
     return uri ?: getImageUriForPreQ(context)
+}
+
+fun String.parseDate(): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val outputFormat = SimpleDateFormat("MMMM d, yyyy, h:mm a", Locale.US)
+    return try {
+        val date = inputFormat.parse(this)
+        outputFormat.format(date ?: Date())
+    } catch (e: Exception) {
+        e.printStackTrace()
+        "Invalid date"
+    }
 }
 
 private fun getImageUriForPreQ(context: Context): Uri {
@@ -96,6 +111,7 @@ suspend fun String.translateLanguage(context: Context, languageCode: String): St
         try {
             Log.d("checkLanguage", this@translateLanguage)
             Log.d("checkLanguage", languageCode)
+
             val (sourceLanguage, targetLanguage) = when(languageCode){
                 "in" -> TranslateLanguage.ENGLISH to TranslateLanguage.INDONESIAN
                 "en" -> TranslateLanguage.INDONESIAN to TranslateLanguage.ENGLISH
@@ -112,7 +128,11 @@ suspend fun String.translateLanguage(context: Context, languageCode: String): St
 
             translate.downloadModelIfNeeded(conditions).await()
 
-            val translateText = translate.translate(this@translateLanguage).await()
+            val translateText = if(languageCode == "in"){
+                this@translateLanguage
+            } else{
+                translate.translate(this@translateLanguage).await()
+            }
 
             translate.close()
 
@@ -122,4 +142,6 @@ suspend fun String.translateLanguage(context: Context, languageCode: String): St
             this@translateLanguage
         }
     }
+
+
 }

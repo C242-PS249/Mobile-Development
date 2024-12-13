@@ -11,6 +11,7 @@ import com.capstone.batiklen.data.remote.response.Metadata
 import com.capstone.batiklen.databinding.ActivityDetailResultBinding
 import com.capstone.batiklen.utils.UserPreferences
 import com.capstone.batiklen.utils.dataStore
+import com.capstone.batiklen.utils.parseDate
 import com.capstone.batiklen.utils.translateLanguage
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -46,6 +47,7 @@ class DetailHistoryActivity : AppCompatActivity() {
         binding.tvBatikName.text = data?.history?.result
         binding.tvBatikDescription.text = getString(R.string.confidence_score, data?.history?.confidenceScore)
         binding.tvAsalContent.text = data?.metadata?.asalBatik
+        binding.tvBatikCreated.text = data?.history?.createdAt?.parseDate()
         Glide.with(this).load(data?.imageUrl?.url?.get(0)).into(binding.imgBatik)
     }
 }

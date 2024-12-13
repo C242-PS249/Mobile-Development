@@ -14,21 +14,24 @@ import com.capstone.batiklen.R
 import com.capstone.batiklen.data.remote.response.BatikItem
 import com.capstone.batiklen.data.remote.response.DataItem
 import com.capstone.batiklen.databinding.ItemBatikBinding
+import com.capstone.batiklen.databinding.ItemHistoryBinding
 import com.capstone.batiklen.ui.detail.DetailActivity
 import com.capstone.batiklen.ui.detail.DetailHistoryActivity
+import com.capstone.batiklen.utils.parseDate
 
 class HistoryAdapter(
     private val context: Context?,
 ) : ListAdapter<DataItem, HistoryAdapter.HistoryViewHolder>(DIFF_CALLBACK) {
 
-    class HistoryViewHolder(private val binding: ItemBatikBinding) : RecyclerView.ViewHolder(binding.root) {
+    class HistoryViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(context: Context, batik: DataItem) {
             binding.namaBatik.text = batik.history?.result
             binding.sejarahBatik.text = context.getString(R.string.confidence_score, batik.history?.confidenceScore.toString())
             Glide.with(itemView.context).load(batik.imageUrl?.url?.get(0)).into(binding.imageUrl)
 //            binding.filosofiBatik.text = batik.metadata?.sejarahBatik
 //            binding.asalBatik.text = batik.metadata?.filosofiBatik
-
+            val date = batik.history?.createdAt?.parseDate()
+            binding.dateCreated.text = date
             // Set click listener
             binding.root.setOnClickListener {
                 val intent = Intent(context, DetailHistoryActivity::class.java)
@@ -46,7 +49,7 @@ class HistoryAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
-        val binding = ItemBatikBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HistoryViewHolder(binding)
     }
 

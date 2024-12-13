@@ -32,8 +32,6 @@ The Batik Lens application is built using a modular architecture to ensure organ
 
     * **Introduction Guide**, A tutorial or onboarding feature guides users through the application when they first open it, making it easier to understand and use the available functions.
 
-    * **Theme Adaptation (Light/Dark Mode)**, The application automatically adapts to your device's theme settings, whether light or dark mode, providing a comfortable user interface based on your preferences.
-
     * **Upload Image from Gallery**, Users can select a batik image from their device's gallery to begin the recognition process.
 
     * **Capture Image with Camera**, With integrated camera functionality, users can directly take a photo of a batik fabric and analyze it instantly within the app.
@@ -42,10 +40,8 @@ The Batik Lens application is built using a modular architecture to ensure organ
 
     * **View Batik Information**, Users can access detailed descriptions and historical information about the recognized batik patterns, enriching their knowledge of traditional art.
 
-    * **Search History**, The app keeps track of previously analyzed images, allowing users to revisit their history for convenience.
-
     * **Personalized User Account**, Users can register, log in, and manage their accounts, enabling a personalized experience across devices.
 
-    * **Settings and Customization**, Offers settings for notification preferences, language options, and other customizations to enhance usability.
+    * **Settings and Customization**, Offers settings for language options and Light Mode / Dark Mode based on user preferences.
 
     * **Educational Content**, The app includes articles and resources about batik, providing users with insightful knowledge about this traditional art form.

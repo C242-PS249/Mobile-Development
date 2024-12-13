@@ -38,6 +38,16 @@
             android:layout_marginTop="8dp"
             android:textSize="16sp"
             android:text="@string/description_detail" />
+
+        <!-- Date Created at -->
+        <TextView
+            android:id="@+id/tvBatikCreated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="@string/description_detail" />
+
         <!-- Asal (Origin) Title -->
         <TextView
             android:id="@+id/tvAsalTitle"
